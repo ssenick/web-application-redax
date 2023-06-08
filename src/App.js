@@ -1,6 +1,7 @@
 import './App.css';
 import {useDispatch, useSelector} from "react-redux";
 import {addCustomerAction, removeCustomerAction} from "./store/customerReduser";
+import {fetchCustomers} from "./acyncActions/customers";
 
 
 function App() {
@@ -34,13 +35,14 @@ function App() {
             <button onClick={() => addCash(Number(prompt()))}>ADD CASH</button>
             <button onClick={() => getCash(Number(prompt()))}>GET CASH</button>
             <button onClick={() => addCustomer(prompt())}>ADD CUSTOMER </button>
+            <button onClick={() => dispatch(fetchCustomers())}>ADD ALL CUSTOMERS </button>
 
          </div>
          {customers.length > 0
             ?
             <div style={{display:'grid', gap: '20px'}}>
-               {customers.map(customer =>
-                  <div onClick={()=> removeCustomer(customer)} key={customer.id} style={{border:'1px solid #000', padding:'10px'}}>{customer.name}</div>
+               {customers.map((customer,index) =>
+                  <div onClick={()=> removeCustomer(customer)} key={index} style={{border:'1px solid #000', padding:'10px'}}>{customer.name}</div>
                )}
             </div>
             :
